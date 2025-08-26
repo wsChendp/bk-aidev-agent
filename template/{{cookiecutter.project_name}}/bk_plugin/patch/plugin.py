@@ -13,8 +13,13 @@ specific language governing permissions and limitations under the License.
 import os
 
 import pymysql
+from django.db.backends.mysql.features import DatabaseFeatures
+from packages.django.patch import PatchFeatures
 
 pymysql.install_as_MySQLdb()
+
+#目前 Django 仅是对 5.7 做了软性的不兼容改动，在没有使用 8.0 特异的功能时，对 5.7 版本的使用无影响
+DatabaseFeatures.minimum_database_version = PatchFeatures.minimum_database_version
 
 # URL 配置模块
 
